@@ -4,25 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>随机生成文本</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 20px; /* 标题和按钮之间的间距 */
+        }
+
+        button {
+            margin: 10px;
+            padding: 15px 20px; /* 设置按钮的内边距，调整按钮大小 */
+            font-size: 16px; /* 设置按钮字体大小 */
+            border: 2px solid #3498db; /* 设置按钮边框样式 */
+            background-color: #3498db; /* 设置按钮背景颜色 */
+            color: #ffffff; /* 设置按钮文本颜色 */
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s; /* 添加过渡效果 */
+        }
+
+        button:hover {
+            background-color: #2980b9; /* 鼠标悬停时的背景颜色 */
+            color: #ffffff; /* 鼠标悬停时的文本颜色 */
+        }
+    </style>
 </head>
 <body>
-<button onclick="generateRandomText()">生成随机文本</button>
-<p id="randomText"></p>
-
+<h style="background-color: burlywood;padding: 50px 80px;font-size: 40px;">演唱会自助取单系统</h>
+<br>
+<br><br>
+<h style="background-color: yellow;padding: 30px 50px;font-size: 25px;">大麦</h>
+<button onclick="generateRandomText1('大麦看台',this)" id="dmktbth">看台</button>
+<p id="randomText1"></p>
+<button onclick="generateRandomText2('大麦内场',this)" id="dmncbth">内场</button>
+<p id="randomText2"></p>
+<br>
+<h  style="background-color: yellow;padding: 30px 50px;font-size: 25px">猫眼</h>
+<button onclick="generateRandomText3('猫眼看台',this)" id="myktbth">看台</button>
+<p id="randomText3"></p>
+<button onclick="generateRandomText4('猫眼内场',this)" id="myncbth">内场</button>
+<p id="randomText4"></p>
+<p style="font-size: 30px;">温馨提示：每个类别只允许获取一次</p>
 <script>
-    function generateRandomText() {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var textData = xhr.responseText;
-                var lines = textData.split('\n');
-                var randomLine = lines[Math.floor(Math.random() * lines.length)];
-                document.getElementById('randomText').textContent = randomLine;
-            }
-        };
-        xhr.open('GET', '123', true);
-        xhr.send();
+    var buttonsClicked = {
+        'dmktbth': false,
+        'dmncbth': false,
+        'myktbth': false,
+        'myncbth': false
+    };
+    function generateRandomText1(keyword,button) {
+        if (!buttonsClicked[button.id]) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var textData = xhr.responseText;
+                    var lines = textData.split('\n');
+                    var filteredLines = lines.filter(line => line.includes(keyword));
+                    var randomLine = filteredLines[Math.floor(Math.random() * filteredLines.length)];
+                    document.getElementById('randomText1').textContent = randomLine;
+                    buttonsClicked[button.id] = true;
+                    button.disabled = true;
+                }
+            };
+            xhr.open('GET', '123', true);
+            xhr.send();
+        }
     }
+        function generateRandomText2(keyword,button) {
+            if (!buttonsClicked[button.id]) {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var textData = xhr.responseText;
+                        var lines = textData.split('\n');
+                        var filteredLines = lines.filter(line => line.includes(keyword));
+                        var randomLine = filteredLines[Math.floor(Math.random() * filteredLines.length)];
+                        document.getElementById('randomText2').textContent = randomLine;
+                        buttonsClicked[button.id] = true;
+                        button.disabled = true;
+                    }
+                };
+                xhr.open('GET', '123', true);
+                xhr.send();
+            }
+        }
+            function generateRandomText3(keyword,button) {
+                if (!buttonsClicked[button.id]) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            var textData = xhr.responseText;
+                            var lines = textData.split('\n');
+                            var filteredLines = lines.filter(line => line.includes(keyword));
+                            var randomLine = filteredLines[Math.floor(Math.random() * filteredLines.length)];
+                            document.getElementById('randomText3').textContent = randomLine;
+                            buttonsClicked[button.id] = true;
+                            button.disabled = true;
+                        }
+                    };
+                    xhr.open('GET', '123', true);
+                    xhr.send();
+                }
+            }
+                function generateRandomText4(keyword,button) {
+                    if (!buttonsClicked[button.id]) {
+                        var xhr = new XMLHttpRequest();
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                var textData = xhr.responseText;
+                                var lines = textData.split('\n');
+                                var filteredLines = lines.filter(line => line.includes(keyword));
+                                var randomLine = filteredLines[Math.floor(Math.random() * filteredLines.length)];
+                                document.getElementById('randomText4').textContent = randomLine;
+                                buttonsClicked[button.id] = true;
+                                button.disabled = true;
+                            }
+                        };
+                        xhr.open('GET', '123', true);
+                        xhr.send();
+                    }
+                }
 </script>
 </body>
 </html>
